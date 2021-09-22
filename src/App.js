@@ -1,59 +1,54 @@
 import React, {useState} from 'react';
 import './App.css';
+import Fruitcomponent from "./Components/Fruitcomponent";
+import Form from "./Components/Form";
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [strawberry, setStrawberries] = React.useState(0);
+    const [banana, setBananas ] = React.useState(0);
+    const [apple, setApples ] = React.useState(0);
+    const [kiwi, setKiwis ] = React.useState(0);
 
-    const minCount = () => {
-        if (count === 0) {
-            return;
-        }
-        setCount(count - 1)
-    }
-
-    const plusCount = () => {
-        setCount(count + 1)
+    function resetValue () {
+        setStrawberries (0);
+        setBananas (0);
+        setApples (0);
+        setKiwis (0);
     }
 
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
-            <form>
-            <div>
-                <h2>
-                    &#127827; Aardbeien
-                    <button id="strawberry_min" type="button" onClick={minCount}>-</button>
-                    <p>{count}</p>
-                    <button id="strawberry_plus" type="button" onClick={plusCount}>+</button>
-                </h2>
-            </div>
-        </form>
-            <div>
-                <h2>
-                    &#127820; Bananen
-                    <button id="banana_min" type="button" onClick={minCount}>-</button>
-                    <p>{count}</p>
-                    <button id="banana_plus" type="button" onClick={plusCount}>+</button>
-                </h2>
-            </div>
+            <Fruitcomponent originalValue={strawberry}>&#127827; Aardbeien</Fruitcomponent>
+            <Fruitcomponent originalValue={banana}>&#127820; Bananen</Fruitcomponent>
+            <Fruitcomponent originalValue={apple}>&#127823; Appels</Fruitcomponent>
+            <Fruitcomponent originalValue={kiwi}>&#129373; Kiwi's</Fruitcomponent>
+
+            {/*Button werkt niet kan helaas niet helemaal vinden waar het probleem zit*/}
+            <button type="button" onClick={ () => resetValue() }>Reset</button>
+
+            {/*Helaas vanwege tijd gebrek dit niet werkend meer kunnen maken, radio buttons hebben niet de gewenste functionaliteit*/}
+           <Form id="firstName">Voornaam</Form>
+            <Form id="lastName">Achternaam</Form>
+            <Form id="age">Leeftijd</Form>
+            <Form id="zipCode">Postcode</Form>
 
             <div>
-                <h2>
-                    &#127823; Appels
-                    <button id="apple_min" type="button" onClick={() => setCount(count - 1)}>-</button>
-                    <p>{count}</p>
-                    <button id="apple_plus" type="button" onClick={() => setCount(count + 1)}>+</button>
-                </h2>
+            <input type="radio" id="day" name="day" value="Overdag"/>
+                <label for="day">Overdag</label>
+            </div>
+            <div>
+                <input type="radio" id="night" name="night" value="'s Avonds"/>
+                <label for="night">'s Avonds</label>
             </div>
 
-            <div>
-                <h2>
-                    &#129373; Kiwi's
-                    <button id="kiwi_min" type="button" onClick={() => setCount(count - 1)}>-</button>
-                    <p>{count}</p>
-                    <button id="kiwi_plus" type="button" onClick={() => setCount(count + 1)}>+</button>
-                </h2>
-            </div>
+            <label for="accept">
+                <input type="checkbox" id="accept" name="accept" value="akkoord"/>
+                Ik ga akkoord met de voorwaarden
+            </label>
+
+
+
 
         </>
     );
